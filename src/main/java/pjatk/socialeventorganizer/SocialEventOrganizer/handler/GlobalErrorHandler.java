@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
-import javax.xml.bind.ValidationException;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;

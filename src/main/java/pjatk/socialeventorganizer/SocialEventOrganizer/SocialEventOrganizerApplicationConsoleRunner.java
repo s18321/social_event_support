@@ -6,8 +6,8 @@
 //import org.springframework.boot.CommandLineRunner;
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
-//import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository;
-//import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.CateringDTO;
+//import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
+//import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
 //
 //import java.util.List;
 //
@@ -16,7 +16,7 @@
 //@AllArgsConstructor
 //public class SocialEventOrganizerApplicationConsoleRunner implements CommandLineRunner {
 //
-//    private final CateringRepository repository;
+//    private final CateringService service;
 //
 //    public static void main(String[] args) {
 //        SpringApplication.run(SocialEventOrganizerApplicationConsoleRunner.class, args);
@@ -24,8 +24,8 @@
 //
 //    @Override
 //    public void run(String... args) throws Exception {
-//        final List<CateringDTO> list = repository.findByCity("Warsaw");
-//        for (CateringDTO catering : list) {
+//        final List<Catering> list = service.findAll();
+//        for (Catering catering : list) {
 //            log.warn(catering.toString());
 //        }
 //    }

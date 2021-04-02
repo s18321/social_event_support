@@ -4,16 +4,16 @@ import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.CateringDTO;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
 
 import java.util.List;
 
 @Repository
-public interface CateringRepository extends CrudRepository<CateringDTO, Long> {
+public interface CateringRepository extends CrudRepository<Catering, Long> {
 
-    List<CateringDTO> findAll();
+    List<Catering> findAll();
 
     @Query("SELECT * FROM catering c WHERE c.city = :city")
-    List<CateringDTO> findByCity(@Param("city") String city);
+    List<Catering> findByCity(@Param("city") String city);
 
 }

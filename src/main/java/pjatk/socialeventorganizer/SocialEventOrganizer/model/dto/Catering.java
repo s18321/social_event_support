@@ -1,5 +1,6 @@
 package pjatk.socialeventorganizer.SocialEventOrganizer.model.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 import org.springframework.data.annotation.Id;
@@ -10,7 +11,13 @@ import java.math.BigInteger;
 
 @Builder
 @Value
-public class CateringDTO implements Serializable {
+@AllArgsConstructor
+    /*
+    NAMING AS IN DB (tables and attributes)
+     */
+public class Catering implements Serializable {
+
+
     @Id
     Long id_catering;
 

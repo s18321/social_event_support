@@ -9,8 +9,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.CateringDTO;
-import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
+import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
 
 import java.util.List;
 
@@ -22,16 +22,14 @@ import java.util.List;
 @RequestMapping("api/catering")
 public class CateringController {
 
-    private final CateringRepository cateringRepository;
+    private final CateringService cateringService;
 
     @RequestMapping(
             method = RequestMethod.GET,
             value = "/all",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CateringDTO>> findAll(){
+    public ResponseEntity<List<Catering>> findAll(){
         log.info("GET ALL CATERING");
-        return ResponseEntity.ok(cateringRepository.findAll());
+        return ResponseEntity.ok(cateringService.findAll());
     }
-
 }

@@ -11,7 +11,10 @@ import java.util.List;
 @Repository
 public interface CateringRepository extends CrudRepository<Catering, Long> {
 
-    List<Catering> findAll();
+    /*
+    IF A METHOD NEEDS A CUSTOM IMPLEMENTATION OR IT DOES NOT EXITS IN CrudRepository interface => it needs to be written here.
+    Otherwise you dont need to, just call the method from ServiceImpl
+     */
 
     @Query("SELECT * FROM catering c WHERE c.city = :city")
     List<Catering> findByCity(@Param("city") String city);

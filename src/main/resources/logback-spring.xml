@@ -5,24 +5,10 @@
         </encoder>
     </appender>
 
-<!--    <root level="debug">-->
-<!--    </root>-->
-
-<!--    <logger name="org.zalando.logbook.Logbook" level="trace" additivity="false">-->
-<!--        <appender-ref ref="STDOUT"/>-->
-<!--    </logger>-->
-
-<!--    <logger name="pjatk.socialeventorganizer" level="debug">-->
-<!--        <appender-ref ref="STDOUT"/>-->
-<!--    </logger>-->
-
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <logger name="pjatk.socialeventorganizer" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="STDOUT"/>
     </logger>
-<!--    <logger name="guru.springframework.helpers" level="WARN" additivity="false">-->
-<!--        <appender-ref ref="CONSOLE"/>-->
-<!--        <appender-ref ref="FILE"/>-->
-<!--    </logger>-->
+
 </configuration>

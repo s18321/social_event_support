@@ -26,7 +26,7 @@
 //    public void run(String... args) throws Exception {
 //        final List<Catering> list = service.findAll();
 //        for (Catering catering : list) {
-//            log.warn(catering.toString());
+//            log.info(catering.toString());
 //        }
 //    }
 //}

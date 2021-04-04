@@ -3,7 +3,6 @@ package pjatk.socialeventorganizer.SocialEventOrganizer.service
 import com.google.common.collect.ImmutableList
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository
-import pjatk.socialeventorganizer.SocialEventOrganizer.service.impl.CateringServiceImpl
 import spock.lang.Specification
 import spock.lang.Subject
 
@@ -17,13 +16,13 @@ class CateringServiceTest extends Specification {
     def setup(){
         cateringRepository = Mock()
 
-        cateringService = new CateringServiceImpl(cateringRepository)
+        cateringService = new CateringService(cateringRepository)
     }
 
     def "findAll positive test scenario"() {
         given:
         def catering = Catering.builder()
-                .id_catering(1)
+                .cateringId(1)
                 .name('Name')
                 .city('Warsaw')
                 .build()

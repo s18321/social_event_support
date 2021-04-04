@@ -1,42 +1,50 @@
 package pjatk.socialeventorganizer.SocialEventOrganizer.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Builder
-@Value
+@Getter
+@Setter
 @AllArgsConstructor
-    /*
-    NAMING AS IN DB (tables and attributes)
-     */
+@RequiredArgsConstructor
+/*
+NAMING AS IN DB (tables and attributes)
+ or with annotation @Column("column_name)/@Table("table_name)
+ */
 public class Catering implements Serializable {
 
-
     @Id
-    Long id_catering;
+    @Column("id_catering")
+    Long cateringId;
 
     String name;
 
     String city;
 
-    String street_name;
+    @Column("street_name")
+    String streetName;
 
-    int street_number;
+    @Column("street_number")
+    int streetNumber;
 
-    String contact_email;
+    @Column("contact_email")
+    String email;
 
-    BigInteger contact_phone_number;
+    @Column("contact_phone_number")
+    BigInteger phoneNumber;
 
-    BigDecimal service_cost;
+    @Column("service_cost")
+    BigDecimal serviceCost;
 
     String description;
 
-    int id_business;
+    @Column("id_business")
+    int businessId;
 
 }

@@ -25,7 +25,7 @@ public class CateringService {
     CateringMapper cateringMapper;
 
 
-    public List<Catering> findAll() {
+    public ImmutableList<Catering> findAll() {
         final List<Catering> cateringList = (List<Catering>) repository.findAll();
         return ImmutableList.copyOf(cateringList);
     }
@@ -35,10 +35,10 @@ public class CateringService {
                 .orElseThrow(() -> new NotFoundException("Catering with name " + name + " not found"));
     }
 
-    public List<Catering> findByCity(String city) {
+    public ImmutableList<Catering> findByCity(String city) {
         final List<Catering> cateringList = repository.findByCity(city);
         if (cateringList != null && !cateringList.isEmpty()) {
-            return cateringList;
+            return ImmutableList.copyOf(cateringList);
         } else {
             throw new NotFoundException("No catering in the city " + city + " was found");
         }

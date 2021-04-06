@@ -61,11 +61,4 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         log.error(ex.getMessage(), ex);
     }
 
-//    @ExceptionHandler(NotFoundException.class)
-//    public ResponseEntity<String> onNotFoundException(Exception ex) {
-//        log.error(ex.getMessage(), ex);
-//        log.info("Exception found: " + ex.getMessage());
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
-
 }

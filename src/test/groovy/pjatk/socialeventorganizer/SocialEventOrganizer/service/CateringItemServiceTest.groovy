@@ -1,6 +1,7 @@
 package pjatk.socialeventorganizer.SocialEventOrganizer.service
 
 import com.google.common.collect.ImmutableList
+import pjatk.socialeventorganizer.SocialEventOrganizer.mapper.CateringItemMapper
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.CateringItem
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringItemRepository
 import spock.lang.Specification
@@ -13,10 +14,12 @@ class CateringItemServiceTest extends Specification {
 
     CateringItemRepository repository
 
+    CateringItemMapper mapper
+
     def setup() {
         repository = Mock()
 
-        cateringItemService = new CateringItemService(repository)
+        cateringItemService = new CateringItemService(repository, mapper)
     }
 
     def "findAll positive test scenario"() {

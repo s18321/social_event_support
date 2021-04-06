@@ -1,6 +1,7 @@
 package pjatk.socialeventorganizer.SocialEventOrganizer.controller;
 
 
+import com.google.common.collect.ImmutableList;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.CateringRe
 import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 
 @Slf4j
@@ -30,7 +30,7 @@ public class CateringController {
             method = RequestMethod.GET,
             value = "/all",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Catering>> findAll() {
+    public ResponseEntity<ImmutableList<Catering>> findAll() {
         log.info("GET ALL CATERING");
         return ResponseEntity.ok(cateringService.findAll());
     }

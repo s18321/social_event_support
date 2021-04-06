@@ -24,6 +24,7 @@ public class CateringService {
 
     CateringMapper cateringMapper;
 
+
     public List<Catering> findAll() {
         final List<Catering> cateringList = (List<Catering>) repository.findAll();
         return ImmutableList.copyOf(cateringList);
@@ -44,7 +45,7 @@ public class CateringService {
 
     }
 
-    public NewCateringResponse save(CateringRequest request) {
+    public NewCateringResponse addNewCatering(CateringRequest request) {
         final Catering catering = cateringMapper.mapToDTO(request);
         log.info("TRYING TO SAVE" + catering.toString());
         repository.save(catering);

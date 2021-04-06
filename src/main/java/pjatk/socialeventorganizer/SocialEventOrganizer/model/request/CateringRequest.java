@@ -1,6 +1,7 @@
 package pjatk.socialeventorganizer.SocialEventOrganizer.model.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 /*
 FIELDS NAMES AND TYPES  MUST MATCH THE KEY VALUES IN JSON BODY.
  */

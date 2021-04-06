@@ -59,7 +59,7 @@ public class CateringController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NewCateringResponse> addCatering(@Valid @RequestBody CateringRequest request) {
-        final NewCateringResponse response = cateringService.save(request);
+        final NewCateringResponse response = cateringService.addNewCatering(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

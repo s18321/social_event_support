@@ -9,7 +9,7 @@ import pjatk.socialeventorganizer.SocialEventOrganizer.mapper.CateringMapper;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.CateringRequest;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.NewCateringResponse;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.CateringResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class CateringService {
 
     }
 
-    public NewCateringResponse addNewCatering(CateringRequest request) {
+    public CateringResponse addNewCatering(CateringRequest request) {
         final Catering catering = cateringMapper.mapToDTO(request);
         log.info("TRYING TO SAVE" + catering.toString());
         repository.save(catering);

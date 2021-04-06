@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.CateringRequest;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.NewCateringResponse;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.CateringResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
 
 import javax.validation.Valid;
@@ -58,8 +58,8 @@ public class CateringController {
             value = "/add",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<NewCateringResponse> addCatering(@Valid @RequestBody CateringRequest request) {
-        final NewCateringResponse response = cateringService.addNewCatering(request);
+    public ResponseEntity<CateringResponse> addCatering(@Valid @RequestBody CateringRequest request) {
+        final CateringResponse response = cateringService.addNewCatering(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

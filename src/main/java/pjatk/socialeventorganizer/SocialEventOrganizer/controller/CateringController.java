@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.CateringRequest;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.NewCateringResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
@@ -36,25 +35,22 @@ public class CateringController {
         return ResponseEntity.ok(cateringService.findAll());
     }
 
-
     @RequestMapping(
             method = RequestMethod.GET,
-            value = "/{city}",
+            value = "/city/{city}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity findByCity(@PathVariable String city) {
         log.info("GET " + city);
-        ResponseEntity response = null;
-        try {
-            log.info("TEST");
-            response = ResponseEntity.ok(cateringService.findByCity(city));
+        return ResponseEntity.ok(cateringService.findByCity(city));
+    }
 
-
-        } catch (NotFoundException e) {
-            return response = ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(e.getMessage());
-        }
-        return response;
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/name/{name}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity findByCateringName(@PathVariable String name) {
+        log.info("GET " + name);
+        return ResponseEntity.ok(cateringService.findByName(name));
     }
 
     @RequestMapping(
@@ -68,17 +64,13 @@ public class CateringController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-
     @RequestMapping(
             method = RequestMethod.PUT,
             value = "/{id}", //name same as function argument
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateCatering(@Valid @RequestBody CateringRequest request, @PathVariable Long id) {
         cateringService.updateCatering(id, request);
-        return ResponseEntity.noContent().
-
-                build();
-
+        return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(
@@ -88,6 +80,4 @@ public class CateringController {
         cateringService.deleteCatering(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }

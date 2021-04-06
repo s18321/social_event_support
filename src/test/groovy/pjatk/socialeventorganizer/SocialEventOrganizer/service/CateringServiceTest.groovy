@@ -22,7 +22,7 @@ class CateringServiceTest extends Specification {
     def "findAll positive test scenario"() {
         given:
         def catering = Catering.builder()
-                .cateringId(1)
+                .id(1)
                 .name('Name')
                 .city('Warsaw')
                 .build()

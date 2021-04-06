@@ -3,10 +3,13 @@ package pjatk.socialeventorganizer.SocialEventOrganizer.model.dto;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -21,7 +24,7 @@ public class Catering implements Serializable {
 
     @Id
     @Column("id_catering")
-    Long cateringId;
+    Long id;
 
     String name;
 
@@ -46,5 +49,8 @@ public class Catering implements Serializable {
 
     @Column("id_business")
     int businessId;
+
+    @MappedCollection(idColumn = "id_catering")
+    Set<CateringItem> cateringItemSet = new HashSet<>();
 
 }

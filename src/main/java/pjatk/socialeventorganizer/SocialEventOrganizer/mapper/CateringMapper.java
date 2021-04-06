@@ -51,7 +51,7 @@ public class CateringMapper {
         final String description = convertDescriptionsString(requestDescription);
 
         return Catering.builder()
-                .cateringId(id)
+                .id(id)
                 .name(request.getName())
                 .city(request.getCity())
                 .streetName(request.getStreetName())
@@ -67,7 +67,7 @@ public class CateringMapper {
 
     public NewCateringResponse mapToResponse(Catering catering) {
         return NewCateringResponse.builder()
-                .id(catering.getCateringId())
+                .id(catering.getId())
                 .name(catering.getName())
                 .email(catering.getEmail())
                 .build();

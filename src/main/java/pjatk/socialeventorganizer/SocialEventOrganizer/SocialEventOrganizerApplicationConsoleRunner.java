@@ -7,6 +7,8 @@
 //import org.springframework.boot.SpringApplication;
 //import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
+//import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.CateringMenu;
+//import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringMenuService;
 //import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
 //
 //import java.util.List;
@@ -16,7 +18,7 @@
 //@AllArgsConstructor
 //public class SocialEventOrganizerApplicationConsoleRunner implements CommandLineRunner {
 //
-//    private final CateringService service;
+//    private final CateringMenuService service;
 //
 //    public static void main(String[] args) {
 //        SpringApplication.run(SocialEventOrganizerApplicationConsoleRunner.class, args);
@@ -24,8 +26,8 @@
 //
 //    @Override
 //    public void run(String... args) throws Exception {
-//        final List<Catering> list = service.findAll();
-//        for (Catering catering : list) {
+//        final List<CateringMenu> list = service.findAll();
+//        for (CateringMenu catering : list) {
 //            log.info(catering.toString());
 //        }
 //    }

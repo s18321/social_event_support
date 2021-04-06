@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import pjatk.socialeventorganizer.SocialEventOrganizer.mapper.CateringMapper;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
@@ -14,7 +13,6 @@ import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.NewCaterin
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Value
@@ -27,19 +25,22 @@ public class CateringService {
     CateringMapper cateringMapper;
 
     public List<Catering> findAll() {
-
         final List<Catering> cateringList = (List<Catering>) repository.findAll();
         return ImmutableList.copyOf(cateringList);
     }
 
-    public List<Catering> findByCity(@PathVariable String city) {
+    public Catering findByName(String name) {
+        return repository.findByName(name)
+                .orElseThrow(() -> new NotFoundException("Catering with name " + name + " not found"));
+    }
+
+    public List<Catering> findByCity(String city) {
         final List<Catering> cateringList = repository.findByCity(city);
-        if (cateringList.isEmpty()) {
-            log.info("SERVICE");
-            throw new NotFoundException("There are NO catering companies in " + city);
+        if (cateringList != null && !cateringList.isEmpty()) {
+            return cateringList;
+        } else {
+            throw new NotFoundException("No catering in the city " + city + " was found");
         }
-        return Optional.ofNullable(repository.findByCity(city))
-                .orElseThrow(() -> new NotFoundException("There are no catering companies in " + city));
 
     }
 
@@ -48,8 +49,7 @@ public class CateringService {
         log.info("TRYING TO SAVE" + catering.toString());
         repository.save(catering);
 
-        final NewCateringResponse cateringResponse = cateringMapper.mapToResponse(catering);
-        return cateringResponse;
+        return cateringMapper.mapToResponse(catering);
     }
 
 

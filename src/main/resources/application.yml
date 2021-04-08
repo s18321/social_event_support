@@ -6,6 +6,19 @@ spring:
     password: zapf132i7C5CgeONjPgaA5xlUIJfYeF-
     hikari:
       maximum-pool-size: 5
+
+#spring:
+#  jpa:
+#    database: POSTGRESQL
+#    show-sql: true
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://dumbo.db.elephantsql.com:5432/cvaicqxj
+#    username: cvaicqxj
+#    password: zapf132i7C5CgeONjPgaA5xlUIJfYeF-
+#    hikari:
+#      maximum-pool-size: 5
+#    initialization-mode: never
 #
 #spring:
 #  datasource:

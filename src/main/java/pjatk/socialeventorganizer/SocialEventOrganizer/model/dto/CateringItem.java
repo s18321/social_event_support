@@ -43,6 +43,7 @@ public class CateringItem implements Serializable {
     @Column("id_catering")
     int cateringId;
 
+
 }
 
 

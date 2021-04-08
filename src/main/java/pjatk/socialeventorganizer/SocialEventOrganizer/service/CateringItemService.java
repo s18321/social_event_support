@@ -46,5 +46,4 @@ public class CateringItemService {
         log.info("TRYING TO DELETE CATERING WITH ID " + id);
         repository.deleteById(id);
     }
-
 }

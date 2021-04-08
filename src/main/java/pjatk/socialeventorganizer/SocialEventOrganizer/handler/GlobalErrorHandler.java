@@ -61,4 +61,10 @@ public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
         log.error(ex.getMessage(), ex);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public void illegalArgumentExceptionHandler(Exception ex) {
+        log.error(ex.getMessage(), ex);
+    }
+
 }

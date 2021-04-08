@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,6 +21,7 @@ import java.util.Set;
 NAMING AS IN DB (tables and attributes)
  or with annotation @Column("column_name)/@Table("table_name)
  */
+@Table("catering")
 public class Catering implements Serializable {
 
     @Id
@@ -28,18 +30,10 @@ public class Catering implements Serializable {
 
     String name;
 
-    String city;
 
-    @Column("street_name")
-    String streetName;
-
-    @Column("street_number")
-    int streetNumber;
-
-    @Column("contact_email")
     String email;
 
-    @Column("contact_phone_number")
+    @Column("phone_number")
     BigInteger phoneNumber;
 
     @Column("service_cost")
@@ -50,7 +44,12 @@ public class Catering implements Serializable {
     @Column("id_business")
     int businessId;
 
-    @MappedCollection(idColumn = "id_catering")
-    Set<CateringItem> cateringItemSet = new HashSet<>();
+    //TODO: add address to request
+
+    @Column("id_address")
+    Address address;
+
+    @MappedCollection(idColumn = "id_catering", keyColumn = "id_catering_iten")
+    Set<CateringItem> cateringItems = new HashSet<>();
 
 }

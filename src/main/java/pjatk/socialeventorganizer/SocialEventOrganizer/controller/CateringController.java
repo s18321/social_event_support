@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.IllegalArgumentException;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.CateringRequest;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.CateringResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.service.CateringService;
@@ -32,17 +33,19 @@ public class CateringController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ImmutableList<Catering>> findAll() {
         log.info("GET ALL CATERING");
-        return ResponseEntity.ok(cateringService.findAll());
+        final ImmutableList<Catering> all = cateringService.findAll();
+        log.info(String.valueOf(all.size()));
+         return ResponseEntity.ok(cateringService.findAll());
     }
 
-    @RequestMapping(
-            method = RequestMethod.GET,
-            value = "/city/{city}",
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity findByCity(@PathVariable String city) {
-        log.info("GET " + city);
-        return ResponseEntity.ok(cateringService.findByCity(city));
-    }
+//    @RequestMapping(
+//            method = RequestMethod.GET,
+//            value = "/city/{city}",
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity findByCity(@PathVariable String city) {
+//        log.info("GET " + city);
+//        return ResponseEntity.ok(cateringService.findByCity(city));
+//    }
 
     @RequestMapping(
             method = RequestMethod.GET,
@@ -69,7 +72,12 @@ public class CateringController {
             value = "/{id}", //name same as function argument
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity updateCatering(@Valid @RequestBody CateringRequest request, @PathVariable Long id) {
-        cateringService.updateCatering(id, request);
+        try {
+            cateringService.updateCatering(id, request);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
         return ResponseEntity.noContent().build();
     }
 
@@ -77,7 +85,12 @@ public class CateringController {
             method = RequestMethod.DELETE,
             value = "/{id}") //name same as function argument
     public ResponseEntity deleteCatering(@PathVariable Long id) {
-        cateringService.deleteCatering(id);
+        try {
+            cateringService.deleteCatering(id);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
+
         return ResponseEntity.noContent().build();
     }
 }

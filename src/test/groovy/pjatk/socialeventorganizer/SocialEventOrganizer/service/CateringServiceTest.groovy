@@ -3,6 +3,7 @@ package pjatk.socialeventorganizer.SocialEventOrganizer.service
 import com.google.common.collect.ImmutableList
 import pjatk.socialeventorganizer.SocialEventOrganizer.mapper.CateringMapper
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Catering
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.IllegalArgumentException
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.CateringRequest
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.CateringRepository
@@ -12,23 +13,23 @@ import spock.lang.Subject
 class CateringServiceTest extends Specification {
 
     @Subject
-    CateringService cateringService
+    CateringService service
 
-    CateringRepository cateringRepository
+    CateringRepository repository
 
     CateringMapper mapper
 
 
     def setup() {
-        cateringRepository = Mock()
+        repository = Mock()
         mapper = Mock()
 
-        cateringService = new CateringService(cateringRepository, mapper)
+        service = new CateringService(repository, mapper)
     }
 
     def "findAll positive test scenario"() {
         given:
-        def catering = CateringRequest.builder()
+        def catering = Catering.builder()
                 .id(1)
                 .name('Name')
                 .city('Warsaw')
@@ -39,12 +40,12 @@ class CateringServiceTest extends Specification {
         def target = ImmutableList.copyOf(cateringList)
 
         when:
-        def result = cateringService.findAll()
+        def result = service.findAll()
 
         then:
         result == target
 
-        1 * cateringRepository.findAll() >> target
+        1 * repository.findAll() >> target
     }
 
     def "findByCity positive test scenario"() {
@@ -61,12 +62,12 @@ class CateringServiceTest extends Specification {
         def target = ImmutableList.copyOf(cateringList)
 
         when:
-        def result = cateringService.findByCity(city)
+        def result = service.findByCity(city)
 
         then:
         result == target
 
-        1 * cateringRepository.findByCity(city) >> target
+        1 * repository.findByCityContaining(city) >> target
     }
 
     def "findByCity negative test scenario"() {
@@ -74,42 +75,46 @@ class CateringServiceTest extends Specification {
         def city = 'Nope'
 
         when:
-        cateringService.findByCity(city)
+        service.findByCity(city)
 
         then:
         thrown(NotFoundException)
-        1 * cateringRepository.findByCity(city) >> { throw new NotFoundException() }
+        1 * repository.findByCityContaining(city) >> { throw new NotFoundException() }
     }
 
     def "findByName positive test scenario"() {
         given:
-        def target = Catering.builder()
+        def catering = Catering.builder()
                 .id(1)
                 .name('Name')
                 .city('Warsaw')
                 .build()
 
-        def name = 'Name'
+        def  'Name'
+
+        def cateringList = Arrays.asList(catering)
+
+        def target = ImmutableList.copyOf(cateringList)
 
         when:
-        def result = cateringService.findByName(name)
+        def result = service.findByName(name)
 
         then:
         result == target
 
-        1 * cateringRepository.findByName(name) >> Optional.of(target)
+        1 * repository.findByNameContaining(name) >> target
     }
 
     def "findByName negative test scenario"() {
         given:
-        def name = 'Nope'
+        def  'Nope'
 
         when:
-        cateringService.findByName(name)
+        service.findByName(name)
 
         then:
         thrown(NotFoundException)
-        1 * cateringRepository.findByName(name) >> { throw new NotFoundException() }
+        1 * repository.findByNameContaining(name) >> { throw new NotFoundException() }
     }
 
     def "addNewCatering positive test scenario"() {
@@ -125,11 +130,11 @@ class CateringServiceTest extends Specification {
                 .build();
 
         when:
-        cateringService.addNewCatering(cateringRequest)
+        service.addNewCatering(cateringRequest)
 
         then:
         1 * mapper.mapToDTO(cateringRequest) >> catering
-        1 * cateringRepository.save(catering)
+        1 * repository.save(catering)
 
     }
 
@@ -140,7 +145,29 @@ class CateringServiceTest extends Specification {
                 .city('City')
                 .build();
 
-        def id = 1;
+        def catering = Catering.builder()
+                .id(1)
+                .name('Name')
+                .city('City')
+                .build();
+
+        when:
+        service.updateCatering(1, cateringRequest)
+
+        then:
+        1 * repository.existsById(1) >> true
+        1 * mapper.mapToDTO(cateringRequest, 1) >> catering
+        1 * repository.save(catering)
+    }
+
+    def "updateCatering negative test scenario"() {
+        given:
+        def id = 10000
+
+        def cateringRequest = CateringRequest.builder()
+                .name('Name')
+                .city('City')
+                .build();
 
         def catering = Catering.builder()
                 .id(id)
@@ -149,11 +176,11 @@ class CateringServiceTest extends Specification {
                 .build();
 
         when:
-        cateringService.updateCatering(1, cateringRequest)
+        service.updateCatering(id, cateringRequest)
 
         then:
-        1 * mapper.mapToDTO(cateringRequest, id) >> catering
-        1 * cateringRepository.save(catering)
+        1 * repository.existsById(id) >> false
+        thrown(IllegalArgumentException)
     }
 
     def "deleteCatering positive test scenario"() {
@@ -161,11 +188,23 @@ class CateringServiceTest extends Specification {
         def id = 1;
 
         when:
-        cateringService.deleteCatering(id)
+        service.deleteCatering(id)
 
         then:
-        1 * cateringRepository.deleteById(id)
+        1 * repository.existsById(id) >> true
+        1 * repository.deleteById(id)
     }
 
+    def "deleteCatering negative test scenario"() {
+        given:
+        def id = 100000;
+
+        when:
+        service.deleteCatering(id)
+
+        then:
+        1 * repository.existsById(id) >> false
+        thrown(IllegalArgumentException)
+    }
 
 }

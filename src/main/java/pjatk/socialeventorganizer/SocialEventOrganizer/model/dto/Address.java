@@ -12,9 +12,11 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-//TODO: validation for address
+
 @Table("address")
 public class Address implements Serializable {
+
+    //TODO: validation for address
 
     @Id
     @Column("id_address")

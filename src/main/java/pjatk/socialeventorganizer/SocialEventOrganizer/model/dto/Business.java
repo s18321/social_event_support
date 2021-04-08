@@ -6,8 +6,6 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,39 +15,39 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-/*
-NAMING AS IN DB (tables and attributes)
- or with annotation @Column("column_name)/@Table("table_name)
- */
-@Table("catering")
-public class Catering implements Serializable {
+
+@Table("business")
+public class Business {
+
+    //TODO: validation for business
 
     @Id
-    @Column("id_catering")
+    @Column("id_business")
     Long id;
 
-    String name;
+    @Column("first_name")
+    String firstName;
 
+    @Column("last_name")
+    String lastName;
+
+    @Column("business_name")
+    String businessName;
 
     String email;
 
     @Column("phone_number")
     BigInteger phoneNumber;
 
-    @Column("service_cost")
-    BigDecimal serviceCost;
+    @Column("hashed_password")
+    String password;
 
-    String description;
-
-    @Column("id_business")
-    int businessId;
-
-    //TODO: add address to request
+    @Column("verification_status")
+    String verificationStatus;
 
     @Column("id_address")
     Address address;
 
-    @MappedCollection(idColumn = "id_catering", keyColumn = "id_catering_item")
-    Set<CateringItem> cateringItems = new HashSet<>();
-
+    @MappedCollection(idColumn = "id_business")
+    Set<Catering> caterings = new HashSet<>();
 }

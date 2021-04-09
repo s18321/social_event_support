@@ -30,7 +30,6 @@ public class Catering implements Serializable {
 
     String name;
 
-
     String email;
 
     @Column("phone_number")
@@ -42,7 +41,7 @@ public class Catering implements Serializable {
     String description;
 
     @Column("id_business")
-    int businessId;
+    Integer businessId;
 
     //TODO: add address to request
 

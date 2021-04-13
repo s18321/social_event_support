@@ -7,7 +7,7 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
     <logger name="pjatk.socialeventorganizer" level="DEBUG" additivity="false">
-        <appender-ref ref="CONSOLE"/>
+<!--        <appender-ref ref="CONSOLE"/>-->
         <appender-ref ref="STDOUT"/>
     </logger>
 

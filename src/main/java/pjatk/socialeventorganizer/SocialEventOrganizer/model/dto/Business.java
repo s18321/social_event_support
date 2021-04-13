@@ -50,4 +50,7 @@ public class Business {
 
     @MappedCollection(idColumn = "id_business")
     Set<Catering> caterings = new HashSet<>();
+
+    @MappedCollection(idColumn = "id_business")
+    Set<Location> locations = new HashSet<>();
 }

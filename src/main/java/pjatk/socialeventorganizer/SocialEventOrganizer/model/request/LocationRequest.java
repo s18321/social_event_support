@@ -6,18 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.NumberFormat;
 import pjatk.socialeventorganizer.SocialEventOrganizer.common.RegexConstants;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.enums.LocationDescriptionItemEnum;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-/*
-FIELDS NAMES AND TYPES  MUST MATCH THE KEY VALUES IN JSON BODY.
- */
-public class CateringRequest implements Serializable {
+public class LocationRequest implements Serializable {
+
+    private AddressRequest addressRequest;
+
+    @NotNull(message = "there")
+    List<LocationDescriptionItemEnum> locationDescription;
 
     @NotBlank(message = "Name is mandatory")
     @Size(min = 1, max = 100, message
@@ -31,25 +35,33 @@ public class CateringRequest implements Serializable {
             = "Email should be between 5 and 100 characters")
     private String email;
 
-
     @NotBlank(message = "Phone number is mandatory")
     @Size(min = 9, max = 9, message
             = "phone number should be 9 characters long")
     @Pattern(regexp = RegexConstants.PHONE_NUMBER_REGEX, message = "should contain only digits")
     private String phoneNumber;
 
-
-    @NotBlank(message = "If there no are service cost, please enter 0")
-    @Pattern(regexp = RegexConstants.PRICE_REGEX, message = "should contain only digits or digits separated by a dot sign (1.23)")
-    private String serviceCost;
-
-    private String description;
+    @NotNull
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    private Integer seatingCapacity;
 
     @NotNull
     @NumberFormat(style = NumberFormat.Style.NUMBER)
-    private int businessId;
+    private Integer standingCapacity;
+
+    private String description;
+
+    @NotBlank(message = "If there no are service cost, please enter 0")
+    @Pattern(regexp = RegexConstants.PRICE_REGEX, message = "should contain only digits or digits separated by a dot sign (1.23)")
+    private String dailyRentCost;
+
+    @NotNull
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    private Integer sizeSqMeters;
+
+    @NotNull
+    @NumberFormat(style = NumberFormat.Style.NUMBER)
+    private Integer businessId;
 
 
 }
-
-

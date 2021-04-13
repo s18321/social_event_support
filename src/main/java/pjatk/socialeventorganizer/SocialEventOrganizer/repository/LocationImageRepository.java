@@ -2,10 +2,8 @@ package pjatk.socialeventorganizer.SocialEventOrganizer.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.Location;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.LocationImage;
 
 @Repository
-public interface LocationRepository extends CrudRepository<Location, Long> {
-
-
+public interface LocationImageRepository extends CrudRepository<LocationImage, Long> {
 }

@@ -13,7 +13,6 @@ public class Converter {
 
     public BigDecimal convertPriceString(String inputPrice) {
         final String format = String.format("%.2f", Double.parseDouble(inputPrice));
-        log.info(format);
         return new BigDecimal(format);
     }
 

@@ -25,6 +25,8 @@ public class CateringService {
 
     CateringMapper cateringMapper;
 
+    LocationService locationService;
+
 
     public ImmutableList<Catering> findAll() {
         final List<Catering> cateringList = (List<Catering>) repository.findAll();
@@ -53,9 +55,12 @@ public class CateringService {
         final Catering catering = cateringMapper.mapToDTO(request);
         log.info("TRYING TO SAVE" + catering.toString());
         repository.save(catering);
-        log.info("SAVED");
+        log.info("SAVED CATERING");
+
+
         return cateringMapper.mapToResponse(catering);
     }
+
 
 
     public void updateCatering(Long cateringId, CateringRequest request) {

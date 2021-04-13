@@ -5,21 +5,22 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.io.Serializable;
-
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@ToString
-@Table("description_item")
-public class LocationDescriptionItem implements Serializable {
+@Table("location_image")
+public class LocationImage {
 
     @Id
-    @Column("name")
-    String id;
+    @Column("id_location_image")
+    Long id;
 
-    String description;
+    String image;
 
+    String alt;
+
+    @Column("id_location")
+    Integer locationId;
 }

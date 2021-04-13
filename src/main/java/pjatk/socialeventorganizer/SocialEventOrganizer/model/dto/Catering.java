@@ -43,8 +43,6 @@ public class Catering implements Serializable {
     @Column("id_business")
     Integer businessId;
 
-    //TODO: add address to request
-
     @Column("id_address")
     Address address;
 

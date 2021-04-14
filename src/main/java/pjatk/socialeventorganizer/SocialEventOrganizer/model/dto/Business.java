@@ -6,6 +6,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 
 @Table("business")
-public class Business {
+public class Business implements Serializable {
 
     //TODO: validation for business
 

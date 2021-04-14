@@ -6,12 +6,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pjatk.socialeventorganizer.SocialEventOrganizer.mapper.ImageMapper;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.LocationImage;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.ImageRequestDetails;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.LocationImageRequest;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.ImageResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.repository.LocationImageRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Value
@@ -36,5 +38,14 @@ public class LocationImageService {
         }
 
         return response;
+    }
+
+    public List<LocationImage> findByLocationId(long locationId) {
+        final Optional<List<LocationImage>> allByLocationId = repository.findAllByLocationId(locationId);
+        if (allByLocationId.isPresent() && !allByLocationId.get().isEmpty()) {
+            return allByLocationId.get();
+        }
+        throw new NotFoundException("There are no images to show");
+
     }
 }

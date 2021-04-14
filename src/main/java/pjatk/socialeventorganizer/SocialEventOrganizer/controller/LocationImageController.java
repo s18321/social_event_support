@@ -6,15 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.LocationImage;
+import pjatk.socialeventorganizer.SocialEventOrganizer.model.exception.NotFoundException;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.request.LocationImageRequest;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.response.ImageResponse;
 import pjatk.socialeventorganizer.SocialEventOrganizer.service.LocationImageService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @AllArgsConstructor
@@ -36,4 +36,19 @@ public class LocationImageController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @RequestMapping(
+            method = RequestMethod.GET,
+            value = "/location/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<LocationImage>> getImagesByLocationId(@PathVariable Long id) {
+        try {
+            final List<LocationImage> response = service.findByLocationId(id);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (NotFoundException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+    }
 }

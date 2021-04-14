@@ -8,6 +8,7 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import pjatk.socialeventorganizer.SocialEventOrganizer.model.dto.ref.DescriptionItemRef;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import java.util.HashSet;
 @RequiredArgsConstructor
 @ToString
 @Table("location")
-public class Location {
+public class Location implements Serializable {
 
     @Id
     @Column("id_location")
